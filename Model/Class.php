@@ -47,8 +47,22 @@ class Klas
     public function getTeacherID(): int
     {
         return $this->teacherID;
+    }}
+
+    class classLoader{
+    public function getClasses($pdo){
+        $handle = $pdo->prepare('SELECT * FROM class');
+        $handle->execute();
+        $classes = $handle->fetchAll();
+        return $classes;
     }
 
-
-
+    public function createClasses($getClasses) {
+        $result = [];
+        foreach ($getClasses as $class) {
+            $classObj = new Klas((int)$class['classID'] ,(string)$class['name'], (string)$class['location'], (int)$class['teacherID']);
+            $result[] = $classObj;
+        }
+        return $result;
+    }
 }

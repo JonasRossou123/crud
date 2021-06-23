@@ -1,0 +1,56 @@
+#container{
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+}
+
+#container button {
+    height: 60px;
+    width: 150px;
+    font-family: Andale Mono, monospace;
+    font-size: large;
+    color: navajowhite;
+}
+
+#mainbutton1{
+background-color: darksalmon;
+}
+
+#mainbutton2{
+background-color: darksalmon;
+}
+
+#mainbutton3{
+background-color: darksalmon;
+}
+
+#tablestudents{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p{
+    text-align: center;
+}
+
+footer{
+    text-align: center;
+}
+
+#createbutton{
+    display: block;
+    margin: 0 auto;
+    color:dimgrey;
+}
+
+.btncss{
+    font-family: Andale Mono, monospace;
+    color: navajowhite;
+}
+
+#wrapcreate{
+    width: 30px;
+}

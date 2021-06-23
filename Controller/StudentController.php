@@ -8,33 +8,41 @@ class StudentController
     {
         $pdo = Connection::Open();
 
-        function getStudents($pdo){
-            $handle = $pdo->prepare('SELECT * FROM student');
-            $handle->execute();
-            $students = $handle->fetchAll();
-            return $students;
+        $studentLoader = new StudentLoader($pdo);
+        $classLoader = new classLoader($pdo);
+
+        if(isset($_GET['page']) && $_GET['page'] === 'student') {
+            $getStudents = $studentLoader->getStudents($pdo);
+            $students = $studentLoader->createStudents($getStudents);
+            require 'View/student.php';
         }
 
-        function createStudents($pdo) {
-            $students = getStudents($pdo);
-            $result = [];
-            foreach ($students as $student) {
-                $studentObj = new Student((int)$student['studentID'] ,(string)$student['name'], (string)$student['email'], (int)$student['classID']);
-                $result[] = $studentObj;
+        if(isset($_GET['StudentIdDetail'])){
+            $studentDetail = $studentLoader->getStudentDetails($pdo);
+            require 'View/student-detail.php';
+        }
+
+        if(isset($_GET['student-create'])){
+            if (!empty($_POST)){
+                $handle = $pdo->prepare('INSERT INTO student (`name`, `email`, classID) VALUES (:name, :email, :class)');
+                $handle->bindValue(':name', $_POST['name']);
+                $handle->bindValue(':email', $_POST['email']);
+                $handle->bindValue(':class', (int)$_POST['classID']);
+                $handle->execute();
             }
-            return $result;
+            $getClasses = $classLoader->getClasses($pdo);
+            $classes = $classLoader->createClasses($getClasses);
+            require 'View/student-create.php';
         }
 
-        $students = createStudents($pdo);
 
-
-            //this is just example code, you can remove the line below
-        $user = new User('John Smith');
 
         //you should not echo anything inside your controller - only assign vars here
         // then the view will actually display them.
 
-        //load the view
-        require 'View/student.php';
+
+
+
     }
 }
+
