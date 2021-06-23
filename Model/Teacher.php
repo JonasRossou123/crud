@@ -28,8 +28,23 @@ class Teacher
     {
         return $this->email;
     }
-    
-    
-
-
 }
+
+class TeacherLoader{
+
+    function getTeachers($pdo){
+        $handle = $pdo->prepare('SELECT * FROM teacher');
+        $handle->execute();
+        $teachers = $handle->fetchAll();
+        return $teachers;
+    }
+
+    function createTeachers($getTeachers) {
+        $result = [];
+        foreach ($getTeachers as $teacher) {
+            $teacherObj = new Teacher((int)$teacher['teacherID'] ,(string)$teacher['name'], (string)$teacher['email']);
+            $result[] = $teacherObj;
+        }
+        return $result;
+    }
+  }

@@ -9,8 +9,6 @@
             <label for="email">Email:</label>
             <input type="text" name="email" id="email" required value=""/>
 
-
-
             <label for="classID">Class:</label>
             <select name="classID" id="classID">
                 <?php foreach ($classes as $class): ?>
@@ -21,7 +19,7 @@
                 <?php endforeach; ?>
             </select>
 
-            <input class="btn btn-warning btncss ml-3 mb-2" type="submit" value="Create">
+            <input class="btn btn-warning btncss ml-3 mb-2" name="create" id="create" type="submit" value="Create">
         </form>
     </div>
 
@@ -30,13 +28,13 @@
                 <?php /*foreach ($classes as $class):
                  var_dump($class-> getName());
                 var_dump($_POST);
-                endforeach; */?>
+                endforeach;
+ if(count($_POST)>0){var_dump($_POST);
+ php if(isset($_POST)){var_dump($_POST);
+
+ */?>
 
 
-
-    <?php if(count($_POST)>0){var_dump($_POST);}?>
-    <?php if(isset($_POST)){var_dump($_POST);}?>
-    <?php if(!empty($_POST)){var_dump($_POST);}?>
 
     <p><a href="index.php">Back to homepage</a></p>
     <p>"STUDENT PAGE - CREATE"</p>

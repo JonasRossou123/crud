@@ -26,9 +26,11 @@ if(isset($_GET['page']) && $_GET['page'] === 'student') {
 if(isset($_GET['page']) && $_GET['page'] === 'teacher') {
     $controller = new TeacherController();
 }
-if(isset($_GET['page']) && $_GET['page'] === 'student-adjust') {
-    $controller = new ClassController();
+
+if(isset($_GET['StudentIdUpdate'])){
+    $controller = new StudentController();
 }
+
 if(isset($_GET['student-create'])){
     $controller = new StudentController();
 }

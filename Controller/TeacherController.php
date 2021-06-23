@@ -8,6 +8,18 @@ class TeacherController
     {
         $pdo = Connection::Open();
 
+        $teacherLoader = new TeacherLoader($pdo);
+        //$classLoader = new classLoader($pdo);
+
+        if(isset($_GET['page']) && $_GET['page'] === 'student') {
+            $getTeachers = $teacherLoader->getTeachers($pdo);
+            $teachers = $teacherLoader->createStudents($getTeachers);
+            //if (!empty($_POST)){
+                //$teacherLoader -> deleteStudent($pdo);
+            //}
+            require 'View/student.php';
+        }
+
         function getTeachers($pdo){
             $handle = $pdo->prepare('SELECT * FROM teacher');
             $handle->execute();

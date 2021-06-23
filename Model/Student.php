@@ -150,7 +150,6 @@ class StudentLoader{
         $handle->bindValue(':id', $_GET['StudentIdDetail']);
         $handle->execute();
         $studentdetail = $handle->fetch();
-        var_dump($studentdetail);
         $studentObj = new StudentDetail((int)$studentdetail['studentID'],(string)$studentdetail['studentName'],(string)$studentdetail['studentEmail'],(string)$studentdetail['className'],(string)$studentdetail['classLocation'] ,(string)$studentdetail['teacherName']);
         return $studentObj;
     }
@@ -162,5 +161,33 @@ class StudentLoader{
         $handle->bindValue(':class', $_POST['classID']);
         $handle->execute();
     }
+
+    public function preFillStudent($pdo){
+        $handle = $pdo->prepare('select s.studentID as studentID, s.name as studentName, s.email as studentEmail, c.name as className, c.location as classLocation,t.name as teacherName 
+                                    from student s left join class c on s.classID = c.classID left join teacher t on c.teacherID = t.teacherID where s.studentID =:id;');
+
+        $handle->bindValue(':id', $_GET['StudentIdUpdate']);
+        $handle->execute();
+        $studentdetail = $handle->fetch();
+        $studentObj = new StudentDetail((int)$studentdetail['studentID'],(string)$studentdetail['studentName'],(string)$studentdetail['studentEmail'],(string)$studentdetail['className'],(string)$studentdetail['classLocation'] ,(string)$studentdetail['teacherName']);
+        return $studentObj;
+    }
+
+
+    public function updateStudent($pdo){
+        $handle = $pdo->prepare('UPDATE student SET name = :name, email= :email, classID = :classid WHERE studentID = :studentid;');
+        $handle->bindValue(':studentid', $_GET['StudentIdUpdate']);
+        $handle->bindValue(':name', $_POST['name']);
+        $handle->bindValue(':email', $_POST['email']);
+        $handle->bindValue(':classid', $_POST['classID']);
+        $handle->execute();
+    }
+
+    public function deleteStudent($pdo){
+        $handle = $pdo->prepare('DELETE FROM student WHERE studentID = :id;');
+        $handle->bindValue(':id', $_POST['id']);
+        $handle->execute();
+    }
+
 
 }

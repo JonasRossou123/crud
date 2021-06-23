@@ -14,6 +14,9 @@ class StudentController
         if(isset($_GET['page']) && $_GET['page'] === 'student') {
             $getStudents = $studentLoader->getStudents($pdo);
             $students = $studentLoader->createStudents($getStudents);
+            if (!empty($_POST)){
+                $studentLoader -> deleteStudent($pdo);
+            }
             require 'View/student.php';
         }
 
@@ -22,18 +25,31 @@ class StudentController
             require 'View/student-detail.php';
         }
 
-        if(isset($_GET['student-create'])){
-            if (!empty($_POST)){
-                $handle = $pdo->prepare('INSERT INTO student (`name`, `email`, classID) VALUES (:name, :email, :class)');
-                $handle->bindValue(':name', $_POST['name']);
-                $handle->bindValue(':email', $_POST['email']);
-                $handle->bindValue(':class', (int)$_POST['classID']);
-                $handle->execute();
+        $getClasses = $classLoader->getClasses($pdo);
+        $classes = $classLoader->createClasses($getClasses);
+
+        if(isset($_GET['student-create'])) {
+            if (!empty($_POST)) {
+                $studentLoader->studentCreator($pdo);
             }
-            $getClasses = $classLoader->getClasses($pdo);
-            $classes = $classLoader->createClasses($getClasses);
             require 'View/student-create.php';
         }
+
+        if(isset($_POST['page']) && $_POST['page'] === 'student') {
+            $studentLoader -> updateStudent($pdo);
+            $_GET = [];
+            $getStudents = $studentLoader->getStudents($pdo);
+            $students = $studentLoader->createStudents($getStudents);
+            require 'View/student.php';
+        }
+
+        if(isset($_GET['StudentIdUpdate'])){
+            $studentDetail = $studentLoader->preFillStudent($pdo);
+            require 'View/student-adjust.php';
+        }
+
+
+
 
 
 
