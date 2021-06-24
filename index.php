@@ -17,36 +17,25 @@ require 'Controller/TeacherController.php';
 
 $controller = new HomepageController();
 
-if(isset($_GET['page']) && $_GET['page'] === 'class') {
-    $controller = new ClassController();
-}
-
-
 if(isset($_GET['page']) && $_GET['page'] === 'student') {
     $controller = new StudentController();
 }
-
 if(isset($_GET['StudentIdUpdate'])){
     $controller = new StudentController();
 }
-
 if(isset($_GET['student-create'])){
     $controller = new StudentController();
 }
-
 if(isset($_GET['StudentIdDetail'])) {
     $controller = new StudentController();
 }
 
-
 if(isset($_GET['page']) && $_GET['page'] === 'teacher') {
     $controller = new TeacherController();
 }
-
 if(isset($_GET['TeacherIdUpdate'])){
     $controller = new TeacherController();
 }
-
 if(isset($_GET['teacher-create'])){
     $controller = new TeacherController();
 }
@@ -54,7 +43,17 @@ if(isset($_GET['TeacherIdDetail'])){
     $controller = new TeacherController();
 }
 
-
-
+if(isset($_GET['page']) && $_GET['page'] === 'class') {
+    $controller = new ClassController();
+}
+if(isset($_GET['ClassIdUpdate'])){
+    $controller = new ClassController();
+}
+if(isset($_GET['class-create'])){
+    $controller = new ClassController();
+}
+if(isset($_GET['ClassIdDetail'])){
+    $controller = new ClassController();
+}
 
 $controller->render($_GET, $_POST);

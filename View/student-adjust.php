@@ -32,6 +32,6 @@
                 endforeach; */?>
 
     <p><a href="index.php">Back to homepage</a></p>
-    <p>"STUDENT PAGE - CREATE"</p>
+    <p>"STUDENT PAGE - ADJUST"</p>
 </section>
 <?php require 'includes/footer.php'?>

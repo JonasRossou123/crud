@@ -35,19 +35,19 @@ class TeachersStudents{
 
     /**
      * TeachersStudents constructor.
-     * @param string $teachersStudents
+     * @param string $name
      */
-    public function __construct(string $teachersStudents)
+    public function __construct(string $name)
     {
-        $this->teachersStudents = $teachersStudents;
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getTeachersStudents(): string
+    public function getName(): string
     {
-        return $this->teachersStudents;
+        return $this->name;
     }
 }
 
@@ -85,6 +85,40 @@ class TeacherLoader{
         }
         return $result;
     }
+
+    public function magic($teachers){
+        function findTeacher($teacher){
+            if (isset($_GET['TeacherIdDetail'])){
+                if ((int)$_GET['TeacherIdDetail'] === $teacher->getTeacherId()){return $teacher->getTeacherId();}}
+            if (isset($_GET['TeacherIdUpdate'])){
+                if ((int)$_GET['TeacherIdUpdate'] === $teacher->getTeacherId()){return $teacher->getTeacherId();}}
+            }
+        $teacher = array_filter($teachers, 'findTeacher');
+        $teacher = reset($teacher);
+        return $teacher;
+    }
+
+    public function teacherCreator($pdo){
+        $handle = $pdo->prepare('INSERT INTO teacher (`name`, `email`) VALUES (:name, :email)');
+        $handle->bindValue(':name', $_POST['name']);
+        $handle->bindValue(':email', $_POST['email']);
+        $handle->execute();
+    }
+
+    public function updateTeacher($pdo){
+        $handle = $pdo->prepare('UPDATE teacher SET name = :name, email= :email WHERE teacherID = :teacherid;');
+        $handle->bindValue(':teacherid', $_GET['TeacherIdUpdate']);
+        $handle->bindValue(':name', $_POST['name']);
+        $handle->bindValue(':email', $_POST['email']);
+        $handle->execute();
+    }
+
+    public function deleteTeacher($pdo){
+        $handle = $pdo->prepare('DELETE FROM teacher WHERE teacherID = :id;');
+        $handle->bindValue(':id', $_POST['id']);
+        $handle->execute();
+    }
+
 
 }
 

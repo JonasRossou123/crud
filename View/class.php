@@ -1,36 +1,41 @@
 <?php require 'includes/header.php'?>
-    <section>
-
-        <table class="table table-striped table-wide">
-            <thead>
+<section>
+    <br>
+    <br>
+    <table class="table table-striped table-wide" id="tablestudents">
+        <thead>
+        <tr>
+            <th colspan="4">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($classes as $class):?>
             <tr>
-                <th width="40%">Name</th>
+                <td class="col-sm-9"><?php echo htmlspecialchars($class->getName())?></td>
+                <td class="col-sm-1">
+                    <a href="?ClassIdDetail=<?php echo $class->getKlasID()?>" class="btn btn-info btncss">Details</a>
+                </td>
+                <td class="col-sm-1">
+                    <a href="?ClassIdUpdate=<?php echo $class->getKlasID()?>" class="btn btn-success btncss">Update</a>
+                </td>
+                <td class="col-sm-1">
+                    <form method="post">
+                        <input type="hidden" name="id" value="<?php echo $class->getKlasID()?>" />
+                        <input type="submit" name="delete" value="Delete" class="btn btn-danger btncss">
+                    </form>
+                </td>
             </tr>
-            </thead>
-            <tbody>
-            <?php foreach($classes AS $class):?>
-                <tr>
-                    <td><?php echo htmlspecialchars($class['name'])?></td>
-                    <td>
-                        <a href="?id=<?php echo $class['classID']?>" class="btn btn-primary">Update</a>
-                    </td>
-                    <td>
-                        <form method="post">
-                            <input type="hidden" name="id" value="<?php echo $class['name']?>" />
-                            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach;?>
-            </tbody>
-        </table>
+        <?php endforeach;?>
+        </tbody>
+    </table>
+    <br>
+    <button type="button" class="btn btn-warning btncss" id="createbutton" onclick="window.location.href='index.php?class-create';">
+        Create new
+    </button>
+    <br>
+    <p><a href="index.php">Back to homepage</a></p>
+    <p>"CLASS PAGE"</p>
 
-        <h4>Class page</h4>
-
-        <p><a href="index.php">Back to homepage</a></p>
-
-        <p>"Dit is de klasse page"</p>
-    </section>
-
+</section>
 
 <?php require 'includes/footer.php'?>
