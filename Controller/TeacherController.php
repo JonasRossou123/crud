@@ -11,38 +11,21 @@ class TeacherController
         $teacherLoader = new TeacherLoader($pdo);
         //$classLoader = new classLoader($pdo);
 
-        if(isset($_GET['page']) && $_GET['page'] === 'student') {
+        if(isset($_GET['page']) && $_GET['page'] === 'teacher') {
             $getTeachers = $teacherLoader->getTeachers($pdo);
-            $teachers = $teacherLoader->createStudents($getTeachers);
+            $teachers = $teacherLoader->createTeachers($getTeachers);
             //if (!empty($_POST)){
                 //$teacherLoader -> deleteStudent($pdo);
             //}
-            require 'View/student.php';
+            require 'View/teacher.php';
         }
 
-        function getTeachers($pdo){
-            $handle = $pdo->prepare('SELECT * FROM teacher');
-            $handle->execute();
-            $teachers = $handle->fetchAll();
-            return $teachers;
+        if(isset($_GET['TeacherIdDetail'])){
+            $getTeachersStudents = $teacherLoader->getTeachersStudents($pdo);
+            $teachersStudents = $teacherLoader->createTeachersStudents($getTeachersStudents);
+            $getTeachers = $teacherLoader->getTeachers($pdo);
+            $teachers = $teacherLoader->createTeachers($getTeachers);
+            require 'View/teacher-detail.php';
         }
-
-        function createTeachers($pdo) {
-            $teachers = getTeachers($pdo);
-            $result = [];
-            foreach ($teachers as $teacher) {
-                $teacherObj = new Teacher((int)$teacher['teacherID'] ,(string)$teacher['name'], (string)$teacher['email']);
-                $result[] = $teacherObj;
-            }
-            return $result;
-        }
-
-        $teachers = createTeachers($pdo);
-
-        //you should not echo anything inside your controller - only assign vars here
-        // then the view will actually display them.
-
-        //load the view
-        require 'View/teacher.php';
     }
 }
