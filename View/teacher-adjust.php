@@ -1,5 +1,5 @@
 <?php require 'includes/header.php' ?>
-
+<!--prefilled input fields and a dropdown list to adjust the information of the selected student-->
 <section>
     <p>Change entries for this teacher</p>
     <div id="wrapcreate">

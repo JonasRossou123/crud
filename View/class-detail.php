@@ -1,4 +1,5 @@
 <?php require 'includes/header.php' ?>
+<!--display all information of the selected class coming from classDetail-->
 <section>
     <br>
     <table class="table table-striped table-wide" id="tablestudentdetail">

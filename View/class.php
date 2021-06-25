@@ -1,4 +1,6 @@
 <?php require 'includes/header.php'?>
+<!--display basic info of all classes-->
+<!--buttons for delete, update, details, create an entity-->
 <section>
     <br>
     <br>

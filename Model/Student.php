@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+//main class for student
 class Student
 {
     private int $studentID;
@@ -50,6 +50,7 @@ class Student
 
 }
 
+//class with detailed infor for student
 class StudentDetail{
     private int $studentID;
     private string $name;
@@ -126,6 +127,7 @@ class StudentDetail{
     }
 }
 
+//all functions in StudentLoader, should have been in an exclusive model-page
 class StudentLoader{
     public function getStudents($pdo){
         $handle = $pdo->prepare('SELECT * FROM student');
@@ -162,6 +164,7 @@ class StudentLoader{
         $handle->execute();
     }
 
+    //query to pre fill the info on a student
     public function preFillStudent($pdo){
         $handle = $pdo->prepare('select s.studentID as studentID, s.name as studentName, s.email as studentEmail, c.name as className, c.location as classLocation,t.name as teacherName 
                                     from student s left join class c on s.classID = c.classID left join teacher t on c.teacherID = t.teacherID where s.studentID =:id;');
@@ -173,7 +176,7 @@ class StudentLoader{
         return $studentObj;
     }
 
-
+    //query to update
     public function updateStudent($pdo){
         $handle = $pdo->prepare('UPDATE student SET name = :name, email= :email, classID = :classid WHERE studentID = :studentid;');
         $handle->bindValue(':studentid', $_GET['StudentIdUpdate']);
@@ -183,6 +186,7 @@ class StudentLoader{
         $handle->execute();
     }
 
+    //query to delte
     public function deleteStudent($pdo){
         $handle = $pdo->prepare('DELETE FROM student WHERE studentID = :id;');
         $handle->bindValue(':id', $_POST['id']);

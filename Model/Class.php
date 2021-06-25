@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+//basic class model
 class Klas
 {
     private int $klasID;
@@ -48,6 +48,7 @@ class Klas
         return $this->teacherID;
     }}
 
+//extra class for more information, this actually needed to be done in 1 class
 class Classdetail{
     private int $classID;
     private string $className;
@@ -102,7 +103,9 @@ class Classdetail{
     }
 }
 
+//all functions for classpage, the loader needs to have an exclusive page in future projects
 class classLoader{
+    //fetching the data from our database
     public function getClasses($pdo){
         $handle = $pdo->prepare('SELECT * FROM class');
         $handle->execute();
@@ -110,6 +113,7 @@ class classLoader{
         return $classes;
     }
 
+    //adding the fetcheddata into our class object
     public function createClasses($getClasses) {
         $result = [];
         foreach ($getClasses as $class) {
@@ -119,6 +123,7 @@ class classLoader{
         return $result;
     }
 
+    //query to insert a new class-entity
     public function classCreator($pdo){
         $handle = $pdo->prepare('INSERT INTO class (`name`, `location`, teacherID) VALUES (:name, :location, :teacherid)');
         $handle->bindValue(':name', $_POST['name']);
@@ -127,12 +132,15 @@ class classLoader{
         $handle->execute();
     }
 
+    //query to delete a class-entity
     public function deleteClass($pdo){
         $handle = $pdo->prepare('DELETE FROM class WHERE classID = :id;');
         $handle->bindValue(':id', $_POST['id']);
         $handle->execute();
         }
 
+
+    //query to fetch more details from class
     public function getClassDetails($pdo){
         $handle = $pdo->prepare('select c.classID as classID, c.name as className, c.location as location, t.name as teacherName from class c left join teacher t on c.teacherID = t.teacherID where classID = :id');
         $handle->bindValue(':id', $_GET['ClassIdDetail']);
@@ -142,6 +150,7 @@ class classLoader{
         return $classObj;
     }
 
+    //query to fill in the input fields when the user wants to update an existing entity
     public function preFillClass($pdo){
         $handle = $pdo->prepare('select c.classID as classID, c.name as className, c.location as location, t.name as teacherName from class c left join teacher t on c.teacherID = t.teacherID where classID = :id');
         $handle->bindValue(':id', $_GET['ClassIdUpdate']);
@@ -151,6 +160,7 @@ class classLoader{
         return $classObj;
         }
 
+    //query to update a class entity
     public function updateClass($pdo){
         $handle = $pdo->prepare('UPDATE class SET name = :name, location = :location, teacherID = :teacherID WHERE classID = :classid;');
         $handle->bindValue(':classid', $_GET['ClassIdUpdate']);

@@ -1,5 +1,5 @@
 <?php
-
+//making connection with database
 class Connection
 {
     public static function Open(): PDO

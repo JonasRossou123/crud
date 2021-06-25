@@ -1,4 +1,5 @@
 <?php require 'includes/header.php' ?>
+    <!--input fields are empty except for the dropdown list-->
     <section>
         <p>add a new class</p>
         <div id="wrapcreate">
@@ -11,6 +12,7 @@
 
                 <label for="teacherID">Teacher:</label>
                 <select name="teacherID" id="teacherID">
+                    <!--user can only select existing teachers, displayed in a dropdown list-->
                     <?php foreach ($teachers as $teacher): ?>
                         <option
                             value=<?php echo $teacher->getTeacherId()  ?>>
@@ -18,23 +20,10 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
-
+                <!--the information will be send via the post-method creating a new entity-->
                 <input class="btn btn-warning btncss ml-3 mb-2" name="create" id="create" type="submit" value="Create">
             </form>
         </div>
-
-
-
-        <?php /*foreach ($classes as $class):
-                 var_dump($class-> getName());
-                var_dump($_POST);
-                endforeach;
- if(count($_POST)>0){var_dump($_POST);
- php if(isset($_POST)){var_dump($_POST);
-
- */?>
-
-
 
         <p><a href="index.php">Back to homepage</a></p>
         <p>"CLASS PAGE - CREATE"</p>

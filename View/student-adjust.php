@@ -1,5 +1,5 @@
 <?php require 'includes/header.php' ?>
-
+<!--prefilled input fields and a dropdown list to adjust the information of the selected student-->
 <section>
     <p>Change entries for this student</p>
     <div id="wrapcreate">
@@ -23,13 +23,6 @@
             <input class="btn btn-warning btncss ml-3 mb-2" type="submit" name="update" id="update" value="Update">
         </form>
     </div>
-
-
-
-    <?php /*foreach ($classes as $class):
-                 var_dump($class-> getName());
-                var_dump($_POST);
-                endforeach; */?>
 
     <p><a href="index.php">Back to homepage</a></p>
     <p>"STUDENT PAGE - ADJUST"</p>
