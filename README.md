@@ -44,16 +44,18 @@ Monday 21/06
 - making classes 
 - from sql data to class instances
 
-
-
 Tuesday 22/06
 - adding css to view
 - linking the create button to a new page 
 - linking detail button to a new page and display all details
+- 
 
 Wednesday 23/06
--
+- create all extra pages for teachers/class
+
 Thursday 24/06
--
+- did the same for teachers
+- did the same for class
+
 Friday 25/06
 -
