@@ -72,8 +72,7 @@ Monday 21/06
 Tuesday 22/06
 - [x] adding css to view/I worked with bootstrap
 - [x] linking the create button to a new page 
-- [x] linking detail button to a new page and display all details
-- [x]  
+- [x] linking detail button to a new page and display all details 
 
 Wednesday 23/06
 - [x] create all extra pages for teachers/class
